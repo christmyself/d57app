@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}托管类套餐{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>托管类产品详情</h1>
+</div>
+<ul>
+    <li>{{combo.id}}</li>
+    <li>{{combo.label}}</li>
+    <li>{{combo.desc}}</li>
+    <li>{{combo.price}}</li>
+</ul>
+{% endblock %}

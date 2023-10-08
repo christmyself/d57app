@@ -1,0 +1,22 @@
+#FROM python:latest
+FROM python:3.6-alpine
+
+ENV FLASK_APP d57app.py
+ENV FLASK_CONFIG docker
+
+RUN adduser -D d57app
+USER d57app
+
+WORKDIR /home/d57app
+
+COPY requirements.txt requirements.txt
+RUN python -m venv venv
+RUN venv/bin/pip install -r requirements.txt
+
+COPY app app
+COPY migrations migrations
+COPY d57app.py config.py boot.sh ./
+
+# 运行时配置
+EXPOSE 5000
+ENTRYPOINT ["./boot.sh"]

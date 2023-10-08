@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+{{ super() }}
+<link   rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+{% endblock %}
+{% endblock %}
+{% block title %}排位赛代练{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>你好, {% if result %}{{ result }}{% else %}输入数值开始计算{% endif %}!</h1>
+</div>
+<script>
+  $(function() {
+$.ajax({
+  url: '{{ url_for("main.autocomplete") }}'
+  }).done(function (data) {
+      $('#currentInput').autocomplete({
+          source: data.json_list,
+          minLength: 1
+      });
+  });
+  $.ajax({
+  url: '{{ url_for("main.autocomplete") }}'
+  }).done(function (data) {
+      $('#expectationInput').autocomplete({
+          source: data.json_list,
+          minLength: 1
+      });
+  });
+});
+</script>
+{{ wtf.quick_form(form) }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}巅峰赛代练{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>你好, {% if result %}{{ result }}{% else %}输入数值开始计算{% endif %}!</h1>
+</div>
+{{ wtf.quick_form(form) }}
+{% endblock %}
